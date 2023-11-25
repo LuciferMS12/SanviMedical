@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Form</title>
     <style>
+        input{
+            outline: none;
+            width: 10rem;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -16,7 +20,32 @@
             background-color: #007BFF;
             color: #fff;
             text-align: center;
-            padding: 1em;
+            padding: 0.1rem 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.5rem;
+        }
+        input{
+            outline: none;
+        }
+
+        header ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        header ul li a{
+            margin-left: 1rem;
+            color: white;
+            font-family: system-ui;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.7rem;
         }
 
         main {
@@ -44,8 +73,9 @@
 
         #cards{
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr;
             align-items: center;
+            justify-content: center;
         }
 
         button {
@@ -53,6 +83,7 @@
             color: #fff;
             padding: 10px;
             cursor: pointer;
+            margin-top: 1rem;
             border: none;
         }
 
@@ -62,12 +93,19 @@
             background-color: #007BFF;
             color: #fff;
         }
+        .product{
+            width: max-content;
+        }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>Order Form</h1>
+        <h1>Order Cart</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Cart</a></li>
+            <li><a href="newTabAdd.html">New Tablet</a></li>
+        </ul>
     </header>
 
     <main>
@@ -76,8 +114,11 @@
 
             </div>
             <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://luciferms12.github.io/SanviMedical/">
             <button type="submit" onclick="submitOrder()">Submit Order</button>
         </form>
+        <button onclick="Clear()">Delete Items</button>
         <p style="color: red;">WARNING :- If You Back Your Order Was Cancel</p>
     </main>
 
@@ -102,14 +143,18 @@
                     <input id="${i}price" type="text" name="${i}price" readonly required>
                 </div>
                 `
-             }
-            
+            }
             for(let i=1;i<=localStorage.getItem("cart");i++)
             {
                 console.log(document.getElementById(i+'name').value = localStorage.getItem(i+'name'))
                 console.log(document.getElementById(i+'price').value = localStorage.getItem(i+'price'))
             }
-        // form.innerHTML += `<button type="button" onclick="submitOrder()">Submit Order</button>`;
+            // form.innerHTML += `<button type="button" onclick="submitOrder()">Submit Order</button>`;
+            function Clear()
+            {
+                localStorage.clear();
+                location.reload();
+            }
     </script>
 
 </body>
