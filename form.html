@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            margin-bottom: 16px;
+            padding: 8px;
+        }
+
+        #cards{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #007BFF;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Order Form</h1>
+    </header>
+
+    <main>
+        <form id="orderForm" action="https://formsubmit.co/evi95981@gmail.com" method="POST">
+            <div id="cards">
+
+            </div>
+            <button type="submit" onclick="submitOrder()">Submit Order</button>
+        </form>
+        <p style="color: red;">WARNING :- If You Back Your Order Was Cancel</p>
+    </main>
+
+    <footer>
+        &copy; 2023 Your Shop
+    </footer>
+
+    <script>
+        function submitOrder() {
+            for(let i=1;i<=localStorage.getItem("cart");i++)
+            {
+                console.log(localStorage.getItem(i+'name')+' + '+localStorage.getItem(i+'price'));
+            }
+        }
+
+        let form = document.getElementById('cards');
+            for(let i=1;i<=localStorage.getItem("cart");i++)
+            {
+                form.innerHTML += `
+                <div class="product" id="product1">
+                    <input id="${i}name" type="text" name="name" readonly required>
+                    <input id="${i}price" type="text" name="price" readonly required>
+                </div>
+                `
+                console.log(document.getElementById(i+'name').value = localStorage.getItem(i+'name'))
+                console.log(document.getElementById(i+'price').value = localStorage.getItem(i+'price'))
+            }
+        // form.innerHTML += `<button type="button" onclick="submitOrder()">Submit Order</button>`;
+    </script>
+
+</body>
+</html>
