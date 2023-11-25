@@ -75,6 +75,7 @@
             <div id="cards">
 
             </div>
+            <input type="hidden" name="_captcha" value="false">
             <button type="submit" onclick="submitOrder()">Submit Order</button>
         </form>
         <p style="color: red;">WARNING :- If You Back Your Order Was Cancel</p>
@@ -97,8 +98,8 @@
             {
                 form.innerHTML += `
                 <div class="product" id="product1">
-                    <input id="${i}name" type="text" name="name" readonly required>
-                    <input id="${i}price" type="text" name="price" readonly required>
+                    <input id="${i}name" type="text" name="${i}name" readonly required>
+                    <input id="${i}price" type="text" name="${i}price" readonly required>
                 </div>
                 `
                 console.log(document.getElementById(i+'name').value = localStorage.getItem(i+'name'))
