@@ -102,6 +102,10 @@
                     <input id="${i}price" type="text" name="${i}price" readonly required>
                 </div>
                 `
+             }
+            
+            for(let i=1;i<=localStorage.getItem("cart");i++)
+            {
                 console.log(document.getElementById(i+'name').value = localStorage.getItem(i+'name'))
                 console.log(document.getElementById(i+'price').value = localStorage.getItem(i+'price'))
             }
