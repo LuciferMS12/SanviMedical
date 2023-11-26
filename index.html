@@ -100,6 +100,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="form.html">Cart</a></li>
             <li><a href="newTabAdd.html">New Tablet</a></li>
+            <li><a href="Status.html">Status</a></li>
         </ul>
     </header>
 
@@ -132,6 +133,8 @@
 
     <script>
         let cartCount = 0;
+        if(localStorage.getItem('cart') != null)
+            cartCount = localStorage.getItem('cart');
 
         function addToCart(productName, productPrice) {
             cartCount++;

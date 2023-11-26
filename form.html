@@ -7,7 +7,7 @@
     <style>
         input{
             outline: none;
-            width: 10rem;
+            width: 8rem;
         }
         body {
             font-family: Arial, sans-serif;
@@ -29,6 +29,7 @@
         }
         input{
             outline: none;
+            margin-left: 0.5rem;
         }
 
         header ul{
@@ -96,6 +97,20 @@
         .product{
             width: max-content;
         }
+
+        .product{
+            display: flex;
+            align-items: center;
+        }
+
+        .check{
+            width: 2rem;
+            height: 1.5rem;
+        }
+        .off{
+            height: 0;
+            width: 0;
+        }
     </style>
 </head>
 <body>
@@ -118,7 +133,7 @@
             <input type="hidden" name="_next" value="https://luciferms12.github.io/SanviMedical/">
             <button type="submit" onclick="submitOrder()">Submit Order</button>
         </form>
-        <button onclick="Clear()">Delete Items</button>
+        <button id="bts" onclick="Clear()">Delete Items</button>
         <p style="color: red;">WARNING :- If You Back Your Order Was Cancel</p>
     </main>
 
@@ -141,7 +156,9 @@
                 <div class="product" id="product1">
                     <input id="${i}name" type="text" name="${i}name" readonly required>
                     <input id="${i}price" type="text" name="${i}price" readonly required>
+                    <input id="${i}Box" class="off" type="checkbox">
                 </div>
+                
                 `
             }
             for(let i=1;i<=localStorage.getItem("cart");i++)
@@ -152,8 +169,52 @@
             // form.innerHTML += `<button type="button" onclick="submitOrder()">Submit Order</button>`;
             function Clear()
             {
+                // for(let i=1;i<=localStorage.getItem("cart");i++)
+                // {    
+                //     let a = document.getElementById(i+'Box');
+                //     a.removeAttribute('class');
+                //     a.setAttribute('class','check');
+                // }
+                // let b = document.getElementById("bts");
+                // b.removeAttribute('onclick');
+                // b.setAttribute('onclick','Delete()')
+                
                 localStorage.clear();
                 location.reload();
+            }
+            function Delete(){
+                let temp = localStorage.getItem('cart');
+                for(let i=1;i<=localStorage.getItem("cart");i++)
+                {    
+                    let arr = [];
+                    let arr1 = [];
+                    let a = document.getElementById(i+'Box');
+                    a.removeAttribute('class');
+                    a.setAttribute('class','off');
+                    if(a.checked == true)
+                    {
+                        localStorage.removeItem(i+'name');
+                        localStorage.removeItem(i+'price');
+                        temp--;
+                        for(j=i;j<=localStorage.getItem("cart");j++)
+                        {
+                            arr.push(localStorage.getItem(j+1+'name'));
+                            arr1.push(localStorage.getItem(j+1+'price'));
+                        }
+                        console.log(arr[0]);
+                        localStorage.clear();
+                        console.log(arr[0]);
+                        for(let j=1;j<=temp;j++)
+                        {
+                            localStorage.setItem(j+"name",arr[i-1])
+                            localStorage.setItem(j+"price",arr1[i-1])
+                        }
+                    }
+                }
+                let b = document.getElementById("bts");
+                b.removeAttribute('onclick');
+                b.setAttribute('onclick','Clear()')
+                localStorage.setItem("cart",temp);
             }
     </script>
 
