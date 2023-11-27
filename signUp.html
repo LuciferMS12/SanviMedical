@@ -60,41 +60,41 @@
     </style>
 </head>
 <body>
-
-    <form id="signupForm">
+    <!-- <iframe name="hidden_iframe" id="hidden_iframe" style="display: none;" onload="if('submitted') {window.location=`www.google.com`;}"></iframe> -->
+    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfst6KP27MRMvM0hVIXQNQjw7MogDdhYhL3BQ1pJ-StStTMuQ/formResponse" target="hidden_iframe" method="post"  id="signupForm">
         <h2>Sign Up</h2>
 
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="entry.1730294918" required>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="entry.914920670" required>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="entry.327827235" required>
 
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" name="confirmPassword" required>
 
-        <button type="submit">Sign Up</button>
+        <button id="btnSubmit" type="button">Sign Up</button>
     </form>
 
     <script>
-        document.getElementById('signupForm').addEventListener('submit', function (e) {
+        document.getElementById('confirmPassword').addEventListener('focusout', function (e) {
             e.preventDefault();
-
-            var username = document.getElementById('username').value;
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            var confirmPassword = document.getElementById('confirmPassword').value;
-
-            // You can add your own validation logic here
-
-            // For simplicity, let's just log the values for now
-            console.log('Username:', username);
-            console.log('Email:', email);
-            console.log('Password:', password);
-            console.log('Confirm Password:', confirmPassword);
+            let pass = document.getElementById('password').value;
+            let confirmPass = document.getElementById('confirmPassword').value;
+            if(pass == confirmPass)
+            {
+                document.getElementById('btnSubmit').removeAttribute('type');
+                document.getElementById('btnSubmit').setAttribute("type","submit")
+            }
+            else
+            {
+                window.alert("Password Is Not Match");
+                document.getElementById('btnSubmit').removeAttribute('type');
+                document.getElementById('btnSubmit').setAttribute("type","button");
+            }
         });
     </script>
 

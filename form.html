@@ -111,6 +111,9 @@
             height: 0;
             width: 0;
         }
+        .Det{
+            width: 95.5%;
+        }
     </style>
 </head>
 <body>
@@ -131,6 +134,8 @@
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_next" value="https://luciferms12.github.io/SanviMedical/">
+            <input class="Det" type="text" name="address" placeholder="Full Address With pincode And Landmark">
+            <input class="Det" id="number" type="number" name="number" placeholder="Enter Number To We Call You For Your Parcel">
             <button type="submit" onclick="submitOrder()">Submit Order</button>
         </form>
         <button id="bts" onclick="Clear()">Delete Items</button>
@@ -142,6 +147,17 @@
     </footer>
 
     <script>
+         document.getElementById('number').addEventListener('focusout', function (e) {
+            e.preventDefault();
+
+            let num = document.getElementById('number').value;
+            let str = num.toString();
+            if(str.length != 10)
+            {
+                window.alert("Sir Your Number Is Wrong Please Check Number. Don't Add +91")
+            }
+
+         });
         function submitOrder() {
             for(let i=1;i<=localStorage.getItem("cart");i++)
             {
