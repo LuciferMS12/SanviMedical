@@ -7,7 +7,7 @@
     <style>
         input{
             outline: none;
-            width: 8rem;
+            width: 4rem;
         }
         body {
             font-family: Arial, sans-serif;
@@ -49,6 +49,10 @@
             font-size: 0.7rem;
         }
 
+        #Quin{
+            width: 3rem;
+        }
+
         main {
             width: 90%;
             max-width: 600px;
@@ -71,12 +75,16 @@
             margin-bottom: 16px;
             padding: 8px;
         }
-
+/* 
         #cards{
             display: grid;
             grid-template-columns: 1fr;
             align-items: center;
             justify-content: center;
+        } */
+
+        .price{
+            width: 3rem;
         }
 
         button {
@@ -114,6 +122,10 @@
         .Det{
             width: 95.5%;
         }
+
+        .name{
+            width: 5rem;
+        }
     </style>
 </head>
 <body>
@@ -127,15 +139,15 @@
     </header>
 
     <main>
-        <form id="orderForm" action="https://formsubmit.co/evi95981@gmail.com" method="POST">
+        <form id="orderForm"  action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScHUCvF2XKLceMWaGpjrpHO4gNl7gnGcocL6NQfeR1J8h4AeQ/formResponse" method="POST">
             <div id="cards">
 
             </div>
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_next" value="https://luciferms12.github.io/SanviMedical/">
-            <input class="Det" type="text" name="address" placeholder="Full Address With pincode And Landmark">
-            <input class="Det" id="number" type="number" name="number" placeholder="Enter Number To We Call You For Your Parcel">
+            <input class="Det" type="text" name="entry.1410593678" placeholder="Full Address With pincode And Landmark">
+            <input class="Det" id="number" type="number" name="entry.858180898" placeholder="Enter Number To We Call You For Your Parcel">
             <button type="submit" onclick="submitOrder()">Submit Order</button>
         </form>
         <button id="bts" onclick="Clear()">Delete Items</button>
@@ -170,17 +182,73 @@
             {
                 form.innerHTML += `
                 <div class="product" id="product1">
-                    <input id="${i}name" type="text" name="${i}name" readonly required>
-                    <input id="${i}price" type="text" name="${i}price" readonly required>
+                    <input class="name" id="${i}name" type="text" name="entry.62964121" readonly required>
+                    <input class="price" id="${i}price" type="text" name="entry.1326905164" readonly required>
+                    <input id="Quin" placeholder="Quintity" type="number" name="entry.67508436" min="1" max="10"required>
+                    <input id="${i}Status" type="text" name="entry.623853979" readonly required>
                     <input id="${i}Box" class="off" type="checkbox">
                 </div>
                 
                 `
+            }//${i}name  ${i}price 
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            if(month == 4 || month == 6 || month == 9 || month == 11)
+            {
+                if(day+4 > 31)
+                {
+                    day = (day+4)%30;
+                    if(month+1 > 12)
+                    {
+                        month = 1;
+                        year++;
+                    }
+                    else
+                        month++;
+                }
+                else
+                    day = day+4;
+            }
+            else if(month == 2)
+            {
+                if(day+4 > 31)
+                {
+                    day = (day+4)%28;
+                    if(month+1 > 12)
+                    {
+                        month = 1;
+                        year++;
+                    }
+                    else
+                        month++;
+                }
+                else
+                    day = day+4;
+            }
+            else{
+                if(day+4 > 31)
+                {
+                    day = (day+4)%31;
+                    if(month+1 > 12)
+                    {
+                        month = 1;
+                        year++;
+                    }
+                    else
+                        month++;
+                }
+                else
+                    day = day+4;
             }
             for(let i=1;i<=localStorage.getItem("cart");i++)
             {
+                
                 console.log(document.getElementById(i+'name').value = localStorage.getItem(i+'name'))
-                console.log(document.getElementById(i+'price').value = localStorage.getItem(i+'price'))
+                console.log(document.getElementById(i+'price').value = localStorage.getItem(i+'price')+'₹')
+                console.log(document.getElementById(i+'Status').value = `${day}/${month}/${year}`)
             }
             // form.innerHTML += `<button type="button" onclick="submitOrder()">Submit Order</button>`;
             function Clear()
